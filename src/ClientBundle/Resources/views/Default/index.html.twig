@@ -1,1 +1,62 @@
-Hello World!
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+<div class="jumbotron">
+    <h1>La blague du jour !</h1><br>
+    <h3>Bienvenue</h3> <br><br>
+</div>
+<div class="container">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">Blagues</h3>
+      </div>
+      <div class="panel-body">
+          {% for blague in blagues %}
+
+              <button id="blague_{{ blague.id }}" class="btn btn-primary likes" onclick="getLikes({{ blague.id }})">
+                  +1
+                  <span class="badge">{{ blague.likes }}</span>
+              </button>
+              <div>{{blague.texte }}<br><br></div>
+          {% endfor %}
+      </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+<style type="text/css">
+h1, h3
+{
+    text-align: center;
+}
+
+.likes {
+    float: right;
+}
+</style>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+function getLikes(id)
+{
+    $.ajax({
+        type:"GET",
+        url: '{{ path("client_ajax") }}',
+        dataType:"text",
+        data: {"id": id},
+        success: function(response)
+        {
+            if (response) {
+                $("#blague_" + id + " .badge").html(response);
+            }
+
+        }
+    });
+}
+</script>
+{% endblock %}

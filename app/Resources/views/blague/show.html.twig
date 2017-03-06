@@ -1,10 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<div class="container">
     <h1>Blague</h1>
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">Panel title</h3>
+      </div>
+      <div class="panel-body">
 
-    <table>
+
+    <table class="table">
         <tbody>
+
             <tr>
                 <th>Id</th>
                 <td>{{ blague.id }}</td>
@@ -33,4 +41,7 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+    </div>
+  </div>
+  </div>
 {% endblock %}

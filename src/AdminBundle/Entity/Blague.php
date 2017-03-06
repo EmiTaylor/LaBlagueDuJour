@@ -35,7 +35,12 @@ class Blague
      */
     private $categorie;
 
-
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="likes", type="integer", nullable=false)
+     */
+    private $likes = 0;
 
     /**
      * Get id
@@ -93,5 +98,29 @@ class Blague
     public function getCategorie()
     {
         return $this->categorie;
+    }
+
+    /**
+     * Set likes
+     *
+     * @param integer likes
+     *
+     * @return Blague
+     */
+    public function setLikes($likes)
+    {
+        $this->likes = $likes;
+
+        return $this;
+    }
+
+    /**
+     * Get likes
+     *
+     * @return integer
+     */
+    public function getLikes()
+    {
+        return $this->likes;
     }
 }
