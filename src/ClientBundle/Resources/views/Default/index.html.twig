@@ -21,6 +21,12 @@
               </button>
               <div>{{blague.texte }}<br><br></div>
           {% endfor %}
+
+          <div id="random"></div>
+          <button id='btn' class='btn btn-primary' onclick='getRandom()'>
+              Générer une blague
+          </button>
+
       </div>
     </div>
 </div>
@@ -41,22 +47,41 @@ h1, h3
 {% endblock %}
 
 {% block javascripts %}
+<!-- fonction qui récupere les like et implémente l'id pour nous la retourner
+dans le bouton -->
 <script>
-function getLikes(id)
-{
-    $.ajax({
-        type:"GET",
-        url: '{{ path("client_ajax") }}',
-        dataType:"text",
-        data: {"id": id},
-        success: function(response)
-        {
-            if (response) {
-                $("#blague_" + id + " .badge").html(response);
-            }
+    function getLikes(id){
+        $.ajax({
+            type:"GET",
+            url: '{{ path("client_ajax") }}',
+            dataType:"text",
+            data: {"id": id},
+            success: function(response)
+            {
+                if (response) {
+                    $("#blague_" + id + " .badge").html(response);
+                }
 
-        }
-    });
-}
+            }
+        });
+    }
+</script>
+<!-- fonction qui genere la blague aléatoire et nous la retourne au clique -->
+<script>
+    function getRandom(){
+        $.ajax({
+            type:"GET",
+            url: '{{ path("client_random")}}',
+            dataType:"text",
+            data:{},
+            success: function(response){
+                if (response) {
+                    $("#random").html(response);
+
+                }
+            }
+        })
+
+    }
 </script>
 {% endblock %}
